@@ -6,7 +6,6 @@ import { Grid2 } from "@mui/material";
 import Button from "@mui/material/Button";
 import Skeleton from "@mui/material/Skeleton";
 import Form from "../components/form";
-import { Link } from "react-router-dom";
 
 const Users = () => {
   const [page, setPage] = React.useState(1);
@@ -33,11 +32,9 @@ const Users = () => {
         <>
           <Grid2 container spacing={2}>
             {data?.data?.map((user) => (
-              <Link to={`/users/${user.id}`}>
-                <Grid2 xs={12} sm={6} md={3} key={user.id}>
-                  <UserCard {...user} />
-                </Grid2>
-              </Link>
+              <Grid2 xs={12} sm={6} md={3} key={user.id}>
+                <UserCard {...user} />
+              </Grid2>
             ))}
           </Grid2>
         </>

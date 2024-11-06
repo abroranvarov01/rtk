@@ -6,8 +6,8 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useDeleteUserMutation } from "../redux/service/user-service";
+import { Link } from "react-router-dom";
 import { useEditUserMutation } from "../redux/service/user-service";
-
 
 const UserCard = (props) => {
   const [deleteProduct] = useDeleteUserMutation();
@@ -50,6 +50,9 @@ const UserCard = (props) => {
           edit
         </Button>
       </CardActions>
+      <Link to={`/users/${props.id}`}>
+        <Button size="small">Detail</Button>
+      </Link>
     </Card>
   );
 };

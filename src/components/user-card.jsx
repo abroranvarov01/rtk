@@ -5,8 +5,23 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { useDeleteUserMutation } from "../redux/service/user-service";
+import { useEditUserMutation } from "../redux/service/user-service";
+
 
 const UserCard = (props) => {
+  const [deleteProduct] = useDeleteUserMutation();
+  const [editProduct] = useEditUserMutation();
+  const editFn = (id) => {
+    const updatedTitle = prompt("Enter new title");
+    const updatedDescription = prompt("Enter new description");
+    editProduct({ id, title: updatedTitle, description: updatedDescription });
+  };
+  const deleteFn = (id) => {
+    deleteProduct(id)
+      .unwrap()
+      .then(() => console.log("deleted"));
+  };
   return (
     <Card sx={{ bgcolor: "#1E1E1E", maxWidth: 345 }}>
       <CardMedia
@@ -23,8 +38,17 @@ const UserCard = (props) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">delete</Button>
-        <Button size="small">edit</Button>
+        <Button onClick={() => deleteFn(props.id)} size="small">
+          delete
+        </Button>
+        <Button
+          onClick={() => {
+            editFn(props.id);
+          }}
+          size="small"
+        >
+          edit
+        </Button>
       </CardActions>
     </Card>
   );

@@ -5,7 +5,7 @@ import { Button, TextField, Box } from "@mui/material";
 
 const Form = () => {
   const { register, handleSubmit, reset } = useForm();
-  const [addUser] = useAddUserMutation();
+  const [addUser, { isLoading, isError, isSuccess }] = useAddUserMutation();
 
   const submit = (data) => {
     addUser(data)
@@ -13,6 +13,7 @@ const Form = () => {
       .then((res) => {
         console.log(res);
       });
+    reset();
   };
 
   return (
@@ -26,7 +27,7 @@ const Form = () => {
         />
         <TextField
           placeholder="Описание"
-          {...register("email")}
+          {...register("description")}
           fullWidth
           margin="normal"
         />
